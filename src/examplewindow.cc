@@ -1,4 +1,5 @@
 #include "examplewindow.h"
+#include <iostream>
 
 ExampleWindow::ExampleWindow()
     : m_VBox(Gtk::ORIENTATION_VERTICAL),
@@ -7,7 +8,7 @@ ExampleWindow::ExampleWindow()
       m_buttonBuffer2("Use buffer 2")
 {
     set_title("Gtk::TextView example");
-    set_border_width(5);
+    set_border_width(15);
     set_default_size(400, 200);
 
     add(m_VBox);
@@ -44,6 +45,14 @@ ExampleWindow::ExampleWindow()
 
     fill_buffers();
     on_button_buffer1();
+
+    auto lambda1 = [this]()
+    {
+        std::cerr << "LC: " << m_refTextBuffer1->get_line_count()
+        << " CC: " << m_refTextBuffer1->get_char_count() << std::endl;
+    };
+
+    m_refTextBuffer1->signal_changed().connect(lambda1);
 
     show_all_children();
 }
