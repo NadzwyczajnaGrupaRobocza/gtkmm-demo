@@ -15,7 +15,8 @@ VPATH += src
 
 OBJS = \
 main.o \
-examplewindow.o
+examplewindow.o \
+keywordhighlighter.o
 
 REBUILDABLES = $(OBJS) $(LINK_TARGET)
 

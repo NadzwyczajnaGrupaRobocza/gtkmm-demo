@@ -1,4 +1,5 @@
 #include "examplewindow.h"
+#include "keywordhighlighter.h"
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
@@ -32,6 +33,8 @@ ExampleWindow::ExampleWindow()
     m_buttonBox.set_spacing(5);
     m_buttonBox.set_layout(Gtk::BUTTONBOX_END);
 
+
+
     // Connect signals:
     m_buttonQuit.signal_clicked().connect(
         sigc::mem_fun(*this,
@@ -39,11 +42,30 @@ ExampleWindow::ExampleWindow()
     m_buttonBuffer1.signal_clicked().connect(
         sigc::mem_fun(*this,
                       &ExampleWindow::on_button_buffer1));
-    m_buttonBuffer2.signal_clicked().connect(
-        sigc::mem_fun(*this,
-                      &ExampleWindow::on_button_buffer2));
+    // m_buttonBuffer2.signal_clicked().connect(
+    //     sigc::mem_fun(*this,
+    //                   &ExampleWindow::on_button_buffer2));
 
     fill_buffers();
+
+    Gdk::RGBA yellow("FFFF00");
+    m_yellowBackground = Gtk::TextTag::create();
+    m_yellowBackground->property_background_rgba().set_value(Gdk::RGBA("DarkSlateGray"));
+
+    m_refTextBuffer1->get_tag_table()->add(m_yellowBackground);
+
+    // KeywordHighlighter yellowMaker(m_refTextBuffer1);
+
+    auto lambda2 = [this]()
+    {
+        m_refTextBuffer1->insert_with_tag(m_refTextBuffer1->begin(),
+                                          "TEST",
+                                          m_yellowBackground);
+    };
+    m_buttonBuffer2.signal_clicked().connect(lambda2);
+        // sigc::mem_fun(yellowMaker,
+        //               &KeywordHighlighter::apply_yellow));
+
     on_button_buffer1();
 
     auto lambda1 = [this]()
