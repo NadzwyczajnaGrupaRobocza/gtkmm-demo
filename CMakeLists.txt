@@ -5,6 +5,7 @@ set(CMAKE_MODULE_PATH  ${PROJECT_SOURCE_DIR}/cmake-extensions/ )
 find_package(PkgConfig)
 
 message("Project source dir is: " ${PROJECT_SOURCE_DIR})
+message("Project bin dir is: " ${PROJECT_BINARY_DIR})
 
 pkg_check_modules (GTKMM gtkmm-3.0)
 
