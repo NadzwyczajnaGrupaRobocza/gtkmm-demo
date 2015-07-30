@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     // Show the window and returns when it is closed.
 
     std::cout << "Przykladowa zmiana programu." << std::endl;
+    std::cout << "Przykladowa zmiana programu 2.0" << std::endl;
 
     return app->run(window);
 }
