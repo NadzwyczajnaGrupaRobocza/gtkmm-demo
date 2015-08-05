@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
-project("Gtkmm demo")
+project("Editor demo")
 
 set(CMAKE_MODULE_PATH  ${PROJECT_SOURCE_DIR}/cmake-extensions/ )
 find_package(PkgConfig)
@@ -16,13 +16,14 @@ include_directories(
     ${GTKMM_INCLUDE_DIRS}
 )
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 include_directories(./src )
 
-add_executable(gtkmm-demo 
+add_executable(editor-demo 
 	src/main.cc
-	src/examplewindow.cc
-	src/keywordhighlighter.cc
+	src/editorwindow.cc
+	src/texttagfactory.cc
+	src/texttagfactoryimpl.cc
 	)
-target_link_libraries(gtkmm-demo ${GTKMM_LIBRARIES})
+target_link_libraries(editor-demo ${GTKMM_LIBRARIES})

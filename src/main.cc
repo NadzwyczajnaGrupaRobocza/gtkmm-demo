@@ -1,4 +1,5 @@
-#include "examplewindow.h"
+#include "editorwindow.h"
+#include "texttagfactoryimpl.h"
 #include <gtkmm/application.h>
 
 int main(int argc, char *argv[])
@@ -6,7 +7,8 @@ int main(int argc, char *argv[])
     Glib::RefPtr<Gtk::Application> app =
         Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
-    ExampleWindow window;
+    EditorWindow window("EDITOR",
+                        std::make_shared<TextTagFactoryImpl>());
 
     // Show the window and returns when it is closed.
 
