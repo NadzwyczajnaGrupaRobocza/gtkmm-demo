@@ -2,6 +2,7 @@
 GTAGS
 GPATH
 GRTAGS
+ID
 
 # Compiled Object files
 *.slo
@@ -31,3 +32,6 @@ GRTAGS
 *.exe
 *.out
 *.app
+
+compile_commands.json
+build
