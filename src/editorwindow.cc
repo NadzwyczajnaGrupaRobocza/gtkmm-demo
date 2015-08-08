@@ -67,7 +67,7 @@ EditorWindow::EditorWindow(const Glib::ustring& window_name,
 void EditorWindow::create_buffer_and_add_sample_text()
 {
     m_text_buffer = Gtk::TextBuffer::create();
-    m_text_buffer->set_text("Hello GUI World!");
+    m_text_buffer->set_text("Hello GUI World!\n");
 }
 
 EditorWindow::~EditorWindow()
