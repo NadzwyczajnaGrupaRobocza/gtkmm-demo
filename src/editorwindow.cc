@@ -39,7 +39,7 @@ EditorWindow::EditorWindow(const Glib::ustring& window_name,
     auto callback_for_add_highlight_clicked = [this]()
     {
         m_text_buffer->insert_with_tag(m_text_buffer->end(),
-                                       "TEST", "highlight"//m_tag_factory->get_background_for_search_result()
+                                       "\nTEST", "highlight"//m_tag_factory->get_background_for_search_result()
                                        );
     };
 
@@ -67,7 +67,7 @@ EditorWindow::EditorWindow(const Glib::ustring& window_name,
 void EditorWindow::create_buffer_and_add_sample_text()
 {
     m_text_buffer = Gtk::TextBuffer::create();
-    m_text_buffer->set_text("Hello GUI World!\n");
+    m_text_buffer->set_text("Hello GUI World!");
 }
 
 EditorWindow::~EditorWindow()
