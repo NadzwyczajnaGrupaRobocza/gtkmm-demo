@@ -29,8 +29,8 @@ private:
 
     Glib::RefPtr<Gtk::TextBuffer> m_text_buffer;
 
-    Gtk::ButtonBox m_button_box;
-    Gtk::Button m_button_quit, m_button_add_highlight;
+    Gtk::ButtonBox m_button_box, d_button_box;
+    Gtk::Button m_button_quit, m_button_add_highlight, d_button_quit, d_button_add_highlight;
 
     std::shared_ptr<TextTagFactory> m_tag_factory;
 };
