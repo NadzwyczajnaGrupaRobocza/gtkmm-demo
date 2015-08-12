@@ -1,34 +1,15 @@
 #include "editorwindow.h"
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
-
-void load()
-{
-    string line;
-  ifstream myfile("example.txt");
-  if (myfile.is_open())
-  {
-      std::cout << std::endl;
-    while ( getline(myfile,line) )
-    {
-      std::cout << line << '\n';
-    }
-    myfile.close();
-  }
-
-  else std::cout << "Unable to open file";
-}
 
 EditorWindow::EditorWindow(const Glib::ustring& window_name,
                            std::shared_ptr<TextTagFactory> tag_factory)
     : m_vbox(Gtk::ORIENTATION_VERTICAL),
       m_button_quit("_Quit", true),
       m_button_add_highlight("Add highlighted text"),
-      m_tag_factory(tag_factory),
-       d_button_quit("_Quit", true),
-      d_button_add_highlight("Load text from a file"),
-      d_tag_factory(tag_factory)
+      m_button_load_text("Load text from file"),
+      m_tag_factory(tag_factory)
 {
     set_title(window_name);
     set_border_width(15);
@@ -49,17 +30,11 @@ EditorWindow::EditorWindow(const Glib::ustring& window_name,
 
     m_button_box.pack_start(m_button_add_highlight, Gtk::PACK_SHRINK);
     m_button_box.pack_start(m_button_quit, Gtk::PACK_SHRINK);
+    m_button_box.pack_start(m_button_load_text, Gtk::PACK_SHRINK);
 
     m_button_box.set_border_width(5);
     m_button_box.set_spacing(5);
     m_button_box.set_layout(Gtk::BUTTONBOX_END);
-
-     d_button_box.pack_start(d_button_add_highlight, Gtk::PACK_SHRINK);
-    d_button_box.pack_start(d_button_quit, Gtk::PACK_SHRINK);
-
-    d_button_box.set_border_width(5);
-    d_button_box.set_spacing(5);
-    d_button_box.set_layout(Gtk::BUTTONBOX_END);
 
     create_buffer_and_add_sample_text();
     m_text_buffer->get_tag_table()->add(m_tag_factory->get_background_for_search_result());
@@ -71,20 +46,14 @@ EditorWindow::EditorWindow(const Glib::ustring& window_name,
                                        );
     };
 
-    auto load_text_from_file = [this]()
-    {
-          m_text_buffer->insert_with_tag(m_text_buffer->end(),
-                                       load(), "highlight"
-                                       );
-    };
-
-
 
     // Connect signals:
     m_button_quit.signal_clicked().connect(
         sigc::mem_fun(*this, &EditorWindow::on_button_quit));
     m_button_add_highlight.signal_clicked().connect(
         callback_for_add_highlight_clicked);
+    m_button_load_text.signal_clicked().connect(
+       sigc::mem_fun(*this, &EditorWindow::load));
 
     // create_buffer_and_add_sample_text();
     m_text_view.set_buffer(m_text_buffer);
@@ -106,6 +75,8 @@ void EditorWindow::create_buffer_and_add_sample_text()
     m_text_buffer->set_text("Hello GUI World!");
 }
 
+
+
 EditorWindow::~EditorWindow()
 {
 }
@@ -114,3 +85,20 @@ void EditorWindow::on_button_quit()
 {
     hide();
 }
+
+void EditorWindow::load()
+    {
+       using namespace std;
+            string line;
+            ifstream myfile;
+            myfile.open ("example.txt");
+            if (myfile.is_open())
+            {
+                while(getline(myfile,line))
+                {
+                   cout << line << endl;
+                }
+                myfile.close();
+            }
+            else cout << "\nUnable to open file.";
+    }

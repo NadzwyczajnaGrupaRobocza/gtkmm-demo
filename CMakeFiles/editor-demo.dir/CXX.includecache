@@ -9,7 +9,11 @@
 /home/programmer/Pulpit/prace/gtkmm-demo/src/editorwindow.cc
 editorwindow.h
 /home/programmer/Pulpit/prace/gtkmm-demo/src/editorwindow.h
+fstream
+-
 iostream
+-
+string
 -
 
 /home/programmer/Pulpit/prace/gtkmm-demo/src/editorwindow.h
