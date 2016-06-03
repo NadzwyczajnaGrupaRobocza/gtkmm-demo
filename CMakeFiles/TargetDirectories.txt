@@ -1,1 +1,0 @@
-/home/programmer/Pulpit/prace/gtkmm-demo/CMakeFiles/editor-demo.dir
